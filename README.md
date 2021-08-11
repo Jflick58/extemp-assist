@@ -146,3 +146,12 @@ To deploy the entire tool, you will need to setup a GCP account.
 Live App: 
 https://extemp-assist-ui-dhyhjqccla-uw.a.run.app/?size=n_20_n
 
+## 🔗 To Do <a name = "todo"></a>
+[] Fix date formatting
+
+[] Move Sqlite DB to cloud storage
+
+[] Add headers to UI
+
+[] Add user auth to UI
+

@@ -1,0 +1,26 @@
+{
+  "engineName": "extemp-assist",
+  "endpointBase": "host",
+  "searchKey": "key",
+  "resultFields": [
+    "summary",
+    "link",
+    "published",
+    "source",
+    "title",
+    "authors",
+    "id"
+  ],
+  "sortFields": [
+    "published",
+    "source"
+  ],
+  "facets": [
+    "published",
+    "source",
+    "authors",
+    "title"
+  ],
+  "titleField": "title",
+  "urlField": "link"
+}

@@ -144,5 +144,5 @@ To deploy the entire tool, you will need to setup a GCP account.
 ## 🔗 URLs <a name = "urls"></a>
 
 Live App: 
-
+https://extemp-assist-ui-dhyhjqccla-uw.a.run.app/?size=n_20_n
 

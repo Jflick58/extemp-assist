@@ -32,6 +32,7 @@ def RSS_to_ElasticSearch(link:str):
         try: 
             parsed_entries.append(RSS_Entry(entry).to_dict())
         except BaseException as e:
+            logging.info(str(e))
             continue
     logging.info("Connecting to ElasticSearch...")
     es = Elasticsearch_Integration(es_host, es_token, "extemp-assist")

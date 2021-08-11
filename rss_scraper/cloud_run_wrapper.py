@@ -5,6 +5,10 @@ from rss_to_elasticsearch import rss_feeds_job
 app = Flask(__name__)
 
 @app.route('/')
+def ping():
+    return "Okay", 200
+
+@app.route("/run")
 def wrapper():
     """GCP Cloud Run requires the ability to listen to HTTP requests. This is just a wrapper for that. 
 

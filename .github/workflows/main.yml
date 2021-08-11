@@ -54,7 +54,7 @@ jobs:
     - name: Build and Push UI Container
       run: |-
         cd webapp
-        docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }} .
+        docker build --build-arg CONFIG_FILE= {{ env.ES_UI_CONFIG}} -t gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }} .
         docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }}
         
     - name: Deploy Batch Container to Cloud Run

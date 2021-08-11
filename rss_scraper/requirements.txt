@@ -9,8 +9,10 @@ elastic-enterprise-search==7.14.0
 elastic-transport==7.14.0
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.1.0/en_core_web_sm-3.1.0-py3-none-any.whl
 feedparser==6.0.8
+Flask==2.0.1
 greenlet==1.1.1
 idna==3.2
+itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
 murmurhash==1.0.5
@@ -37,3 +39,4 @@ typer==0.3.2
 typing-extensions==3.10.0.0
 urllib3==1.26.6
 wasabi==0.8.2
+Werkzeug==2.0.1

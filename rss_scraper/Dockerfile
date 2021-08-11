@@ -19,6 +19,7 @@ RUN pip install -r requirements.txt
 #COPY REPO TO CONTAINER
 COPY . /app
 
+ENV PORT 8080
 ENTRYPOINT ["python"]
 
-CMD ["rss_to_elasticsearch.py"]
+CMD ["cloud_run_wrapper.py"]

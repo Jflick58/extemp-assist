@@ -11,6 +11,7 @@ RUN npm install react-scripts@3.4.1 -g --silent
 COPY . ./
 RUN echo $CONFIG_FILE
 RUN echo $CONFIG_FILE | base64 -d > src/config/engine.json
+RUN cat src/config/engine.json
 RUN npm run build
 
 # production environment

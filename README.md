@@ -155,3 +155,5 @@ https://extemp-assist-ui-dhyhjqccla-uw.a.run.app/?size=n_20_n
 
 [] Add user auth to UI
 
+[] Add functionality to pass abitrary links to be summarized and indexed (Chrome extension?)
+

@@ -1,0 +1,22 @@
+import React from "react";
+
+export default ({ result }) => (
+  <li className="sui-result">
+    <div className="sui-result__header">
+      <span
+        className="sui-result__title"
+        // Snippeted results contain search term highlights with html and are
+        // 100% safe and santitized, so we dangerously set them here
+        {result.summary.raw}
+      />
+    </div>
+    <div className="sui-result__body">
+      <ul className="sui-result__details">
+        <li>
+          <span className="sui-result__key">Summary</span>{" "}
+          <span className="sui-result__value">{result.summary.raw}</span>
+        </li>
+      </ul>
+    </div>
+  </li>
+);

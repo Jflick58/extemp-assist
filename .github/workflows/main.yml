@@ -1,0 +1,71 @@
+# This is a basic workflow to help you get started with Actions
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+name: Cloud_Run_CI
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  ES_UI_CONFIG: ${{ secrets.CONFIG_FILE}}
+  BATCH_SERVICE: extemp-assist-rss
+  UI_SERVICE: extemp-assist-ui
+  ES_HOST: ${{ secrets.ES_HOST }}
+  ES_TOKEN: ${{ secrets.ES_TOKEN }}
+  REGION: us-west1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true  # Set to true to authenticate the Cloud Run action
+
+    - name: Authorize Docker push
+      run: gcloud auth configure-docker
+
+    - name: Build and Push Batch Container
+      run: |-
+        cd rss_scraper
+        docker build --build-arg ES_HOST=${{ env.ES_HOST }} --build-arg ES_TOKEN=${{ env.ES_TOKEN }} -t gcr.io/${{ env.PROJECT_ID }}/${{ env.BATCH_SERVICE }}:${{  github.sha }} .
+        docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.BATCH_SERVICE }}:${{  github.sha }}
+        
+    - name: Deploy Batch Container to Cloud Run
+      id: deploy-batch
+      uses: google-github-actions/deploy-cloudrun@v0.4.0
+      with:
+        service: ${{ env.BATCH_SERVICE }}
+        image: gcr.io/${{ env.PROJECT_ID }}/${{ env.BATCH_SERVICE }}:${{  github.sha }}
+        region: ${{ env.REGION }}
+
+    - name: Build and Push UI Container
+      run: |-
+        cd webapp
+        docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }} .
+        docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }}
+        
+    - name: Deploy Batch Container to Cloud Run
+      id: deploy-ui
+      uses: google-github-actions/deploy-cloudrun@v0.4.0
+      with:
+        service: ${{ env.UI_SERVICE }}
+        image: gcr.io/${{ env.PROJECT_ID }}/${{ env.UI_SERVICE }}:${{  github.sha }}
+        region: ${{ env.REGION }}
+
+    - name: Show Output
+      run: echo ${{ steps.deploy.outputs.url }}

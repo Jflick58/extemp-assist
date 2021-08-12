@@ -142,7 +142,7 @@ To deploy the entire tool, you will need to setup a GCP account.
 
 ## 🖥 Screenshots <a name = "screenshots"></a>
 
-![](https://i.imgur.com/zFbQ95N.png)
+![](https://i.imgur.com/1yK8fOZ.png)
 
 ## 🔗 URLs <a name = "urls"></a>
 

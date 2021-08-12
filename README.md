@@ -138,7 +138,7 @@ To deploy the entire tool, you will need to setup a GCP account.
 7. Create another GCP Cloud Run service, called "extemp-assist-ui". Allow all incoming connections and unathenticated invocations. 
 8. Use main.yml file in `.github/workflows` as your Github Actions template and deploy using a Github action. 
 
-<!--## 📈 Diagrams <a name = "diagrams"></a>
+<!--## 📈 Diagrams <a name = "diagrams"></a>-->
 
 ## 🖥 Screenshots <a name = "screenshots"></a>
 

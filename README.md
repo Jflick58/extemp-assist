@@ -17,6 +17,7 @@
 - [Getting Started](#getting_started)
 - [Deployment](#deployment)
 - [Usage](#usage)
+- [Screenshots](#screenshots)
 - [URLs](#urls)
 
 ## 🧐 About <a name = "about"></a>
@@ -139,7 +140,9 @@ To deploy the entire tool, you will need to setup a GCP account.
 
 <!--## 📈 Diagrams <a name = "diagrams"></a>
 
-<!--## 🖥 Screenshots <a name = "screenshots"></a>-->
+## 🖥 Screenshots <a name = "screenshots"></a>
+
+![](https://i.imgur.com/zFbQ95N.png)
 
 ## 🔗 URLs <a name = "urls"></a>
 

@@ -74,5 +74,11 @@ class Elasticsearch_Integration:
             engine_name=self.engine,
             documents=documents)
 
+    def empty_index(self):
+        resp = self.client.delete_documents(
+            engine_name=self.engine,
+            document_ids=[""]
+        )
+
 
 

@@ -6,6 +6,8 @@ import multiprocessing
 import logging 
 import sys
 import os 
+import traceback
+import time
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -33,11 +35,15 @@ def RSS_to_ElasticSearch(link:str):
             parsed_entries.append(RSS_Entry(entry).to_dict())
         except BaseException as e:
             logging.info(str(e))
+            logging.info(traceback.format_exc())
             continue
     logging.info("Connecting to ElasticSearch...")
     es = Elasticsearch_Integration(es_host, es_token, "extemp-assist")
     logging.info("Connected to ElasticSearch.")
-    logging.info("Indexing articles with ElasticSearch")
+    logging.info(f"Indexing {len(parsed_entries)} articles with ElasticSearch")
+    if len(parsed_entries) == 0:
+        logging.info(f"Couldn't get entries for {link}")
+        return
     es.index_documents(parsed_entries)
     logging.info(f"Job complete for {link}")
 
@@ -45,7 +51,7 @@ def rss_feeds_job():
     """Method to retrieve all RSS feeds and run them in pararell batches of 4 concurrent processes. 
     """
     feeds = get_all_feeds()
-    pool = multiprocessing.Pool(4)
+    pool = multiprocessing.Pool(8)
     pool.map(RSS_to_ElasticSearch, feeds)
 
 

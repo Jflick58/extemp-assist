@@ -3,6 +3,7 @@ import urllib.parse
 
 import feedparser
 from bs4 import BeautifulSoup
+from newspaper import Article
 
 from . import summarize
 
@@ -34,15 +35,27 @@ class RSS_Entry:
         :param entry: A single RSS article
         :type entry: feedparser.util.FeedParserDict
         """
-        self.text = BeautifulSoup(entry["content"][0]['value'], features="html.parser").get_text()
         self.link = entry['link']
-        self.title = entry['title'].replace('"', "")
         self.source = urllib.parse.urlparse(self.link).netloc.split(".")[1].capitalize()
+        if self.source == "Com":
+            self.source = urllib.parse.urlparse(self.link).netloc
+        if entry.get("content", None) == None:
+            self.scrape_content()
+        elif self.source.upper() in ["NYTIMES", "WASHINGTONPOST", "NPR", "LATIMES",
+         "WSJ", "FOREIGNPOLICY.COM"]:
+            self.scrape_content()
+        else:
+            self.text = BeautifulSoup(entry["content"][0]['value'], features="html.parser").get_text()
+        self.title = entry['title'].replace('"', "")
         try:
             self.authors = [f"{author['name']}" for author in entry['authors']]
         except: 
             self.authors = [self.source]
-        self.published = entry["published"]
+        try:
+            parsed_data = entry["published_parsed"]
+            self.published = f"{parsed_data.tm_year}-{parsed_data.tm_mon.rjust(2, '0')}-{parsed_data.tm_mday}"
+        except:
+            self.published = datetime.now().strftime("%Y-%m-%d")
         self.summary = summarize.summarize(self.text)
 
     def to_dict(self):
@@ -61,3 +74,9 @@ class RSS_Entry:
             "summary": self.summary
         }
         return attrs
+
+    def scrape_content(self):
+        article = Article(self.link)
+        article.download()
+        article.parse()
+        self.text = article.text

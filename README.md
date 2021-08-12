@@ -147,7 +147,9 @@ Live App:
 https://extemp-assist-ui-dhyhjqccla-uw.a.run.app/?size=n_20_n
 
 ## 🔗 To Do <a name = "todo"></a>
-[] Fix date formatting
+[X] Fix date formatting
+
+[] Delete articles after 14 days
 
 [] Move Sqlite DB to cloud storage
 

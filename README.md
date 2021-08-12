@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=300px height=300px src="https://www.iconbunny.com/icons/media/catalog/product/2/1/2158.8-speaking-on-podium-icon-iconbunny.jpg" alt="Project logo"></a>
+ <img width=350px height=350px src="https://i.imgur.com/ijC0f2L.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Extemp Assist</h3>

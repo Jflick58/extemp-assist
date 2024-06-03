@@ -144,21 +144,5 @@ To deploy the entire tool, you will need to setup a GCP account.
 
 ![](https://i.imgur.com/1yK8fOZ.png)
 
-## 🔗 URLs <a name = "urls"></a>
 
-Live App: 
-https://extemp-assist-ui-dhyhjqccla-uw.a.run.app/?size=n_20_n
-
-## 🔗 To Do <a name = "todo"></a>
-[X] Fix date formatting
-
-[] Delete articles after 14 days
-
-[] Move Sqlite DB to cloud storage
-
-[] Add headers to UI
-
-[] Add user auth to UI
-
-[] Add functionality to pass abitrary links to be summarized and indexed (Chrome extension?)
 
